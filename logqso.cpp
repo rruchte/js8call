@@ -68,10 +68,12 @@ QString LogQSO::currentCall(){
 }
 
 void LogQSO::on_start_now_button_pressed(){
+  ui->start_date_time->setTimeZone(QTimeZone::utc());
   ui->start_date_time->setDateTime(DriftingDateTime::currentDateTimeUtc());
 }
 
 void LogQSO::on_end_now_button_pressed(){
+  ui->start_date_time->setTimeZone(QTimeZone::utc());
   ui->end_date_time->setDateTime(DriftingDateTime::currentDateTimeUtc());
 }
 
@@ -205,7 +207,7 @@ void LogQSO::initLogQSO(QString const& hisCall, QString const& hisGrid, QString 
 {
   if(!isHidden()) return;
 
-  loadSettings();
+	loadSettings();
 
   ui->call->setFocus();
   ui->call->setText(hisCall);
@@ -222,7 +224,9 @@ void LogQSO::initLogQSO(QString const& hisCall, QString const& hisGrid, QString 
   ui->mode->setText(mode);
   ui->sent->setText(rptSent);
   ui->rcvd->setText(rptRcvd);
+  ui->start_date_time->setTimeZone(QTimeZone::utc());
   ui->start_date_time->setDateTime (dateTimeOn);
+  ui->end_date_time->setTimeZone(QTimeZone::utc());
   ui->end_date_time->setDateTime (dateTimeOff);
 
   m_dialFreq=dialFreq;
